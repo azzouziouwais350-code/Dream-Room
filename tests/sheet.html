@@ -1,0 +1,31 @@
+<!doctype html><html><body style="margin:0;background:#222">
+<canvas id="c" width="640" height="560" style="width:1920px;height:1680px;image-rendering:pixelated"></canvas>
+<script type="module">
+import { ITEMS } from '/src/data/items.js';
+import { itemSprite } from '/src/art/items.js';
+import * as F from '/src/art/furniture.js';
+import { drawCat } from '/src/art/cat.js';
+import { drawWindowScene, WW, WH } from '/src/art/windowScenes.js';
+import { bakeRoomBase, bakeCRT, drawCRTScreen } from '/src/art/roomBase.js';
+import { mk } from '/src/art/pixel.js';
+const g = document.getElementById('c').getContext('2d'); g.imageSmoothingEnabled=false;
+g.fillStyle='#2a2040'; g.fillRect(0,0,640,560);
+// room base + furniture
+g.drawImage(bakeRoomBase(),0,0);
+g.drawImage(F.bakeBed(),40,110); F.drawBlanket(g,40,110,1);
+g.drawImage(F.bakeWardrobe(),212,50); g.drawImage(F.bakeDesk(),252,88); g.drawImage(F.bakeBookcase(),134,96);
+g.drawImage(F.bakeDoor(),6,56); g.drawImage(F.bakePoster(),50,40); g.drawImage(F.bakeClockFace(),86,44);
+g.drawImage(F.bakePainting(0),262,22); g.drawImage(F.bakePhotos(),216,18);
+const w=mk(WW,WH); drawWindowScene(w.getContext('2d'),'night_stars',1,{moon:.5}); g.drawImage(w,136,20); g.drawImage(F.bakeWindowFrame(),132,16);
+g.drawImage(bakeCRT(),278,58); drawCRTScreen(g,283,62,1);
+// cat poses
+const poses=['stand','walk','run','sit','groom','pet','loaf','stretch','crouch','leap','alert'];
+poses.forEach((p,i)=>drawCat(g,{x:20+i*26,y:196,dir:1,pose:p,t:1,ph:1,acc:i==3?{collar:1,hat:1}:i==5?{bow:1,crown:1}:{}}));
+// items
+let x=4,y=212,row=0;
+for(const it of ITEMS){ if(!it.placeable) continue; const s=itemSprite(it.id); if(x+it.w>636){x=4;y+=44} g.drawImage(s,x,y-(s._pad||0)); x+=it.w+6; }
+// window scenes
+const ids=['night_stars','giant_moon','purple_sky','sunset','rain','fog','glow_clouds','floating_islands','hanging_buildings','cloud_doors','night_garden','silent_sky','eclipse','comet','double_moon','room_view','dawn'];
+ids.forEach((id,i)=>{const c=mk(WW,WH);drawWindowScene(c.getContext('2d'),id,2,{moon:.6});g.drawImage(c,4+(i%9)*70,380+Math.floor(i/9)*50)});
+window.__done=true;
+</script></body></html>

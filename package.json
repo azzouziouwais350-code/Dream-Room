@@ -1,0 +1,22 @@
+{
+  "name": "dream-room",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dream Room — Ultimate Edition : A little room between reality and dreams.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node tests/logic.test.mjs",
+    "test:e2e": "node tests/smoke.mjs && node tests/flow.mjs && node tests/features.mjs && node tests/mobile.mjs && node tests/misc.mjs",
+    "test:all": "npm run test && npm run build && npm run test:e2e"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "@fontsource/press-start-2p": "^5.0.0",
+    "@fontsource/vt323": "^5.0.0"
+  }
+}
