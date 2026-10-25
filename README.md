@@ -11,7 +11,7 @@ Gratuit, sans serveur, sans compte, sans publicité : **tout est généré par l
 
 ## Jouer
 
-Une fois publié : `https://<ton-compte>.github.io/<nom-du-dépôt>/`.
+Une fois publié : `https://azzouziouwais350-code.github.io/Dream-Room/`.
 
 | Action | Souris / toucher | Clavier |
 |---|---|---|
